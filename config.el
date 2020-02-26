@@ -89,6 +89,22 @@
 	     (add-hook 'css-mode-hook #'aggressive-indent-mode)
 	     (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
+;; ivy mode
+(use-package swiper
+	     :ensure t)
+(use-package ivy
+	     :after swiper
+	     :defer 3
+	     :ensure t
+	     :config
+	     (setq ivy-use-virtual-buffers t)
+	     (setq enable-recursive-minibuffers t)
+	     ;; enable this if you want `swiper' to use it
+	     ;; (setq search-default-mode #'char-fold-to-regexp)
+	     (global-set-key "\C-s" 'swiper)
+	     (global-set-key (kbd "C-c C-r") 'ivy-resume)
+	     (global-set-key (kbd "<f6>") 'ivy-resume))
+
 (use-package expand-region
   :ensure t
   :bind ("M-m" . er/expand-region))
