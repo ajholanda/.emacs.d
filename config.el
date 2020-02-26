@@ -221,6 +221,12 @@
 		 (if (y-or-n-p "Restore desktop? ")
 		     (session-restore)))))
 
+;;;;;;;;;
+;; WEB ;;
+;;;;;;;;;
+(use-package php-mode
+	     :ensure t)
+
 ;;;;;;;;;;;;;
 ;; ANSIBLE ;;
 ;;;;;;;;;;;;;
