@@ -39,6 +39,10 @@
 
 (setq inhibit-startup-screen t)
 
+;; chinese fonts
+(use-package cnfonts
+	     :ensure t)
+
 ;; greater font size
 (set-default-font "Monospace-16")
 
