@@ -190,3 +190,9 @@
 	     (if (saved-session)
 		 (if (y-or-n-p "Restore desktop? ")
 		     (session-restore)))))
+
+;;;;;;;;;;;;;
+;; ANSIBLE ;;
+;;;;;;;;;;;;;
+(use-package ansible
+	     :ensure t)
