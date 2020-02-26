@@ -126,7 +126,11 @@
 ;;;;;;;;;;;;;
 (use-package magit
 	     :ensure t
-	     :bind (("C-x g" . magit-status)))
+	     :bind (("C-x g" . magit-status))
+	     :config
+	     (info-initialize)
+	     (add-to-list 'Info-directory-list
+			  "~/.emacs.d/site-lisp/magit/Documentation/"))
 
 (use-package ido
 	     :ensure t
