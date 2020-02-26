@@ -79,6 +79,16 @@
 (use-package paredit
 	     :ensure t)
 
+;; aggressive indentation
+(use-package aggressive-indent
+	     :ensure t
+	     :config
+	     (global-aggressive-indent-mode t)
+	     (add-to-list 'aggressive-indent-excluded-modes 'fundamental-mode)
+	     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+	     (add-hook 'css-mode-hook #'aggressive-indent-mode)
+	     (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+
 (use-package expand-region
   :ensure t
   :bind ("M-m" . er/expand-region))
