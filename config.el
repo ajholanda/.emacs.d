@@ -75,7 +75,14 @@
   :ensure t
   :bind ("M-m" . er/expand-region))
 
+;; only y/n to answer
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; help to find the command keys
+(use-package which-key
+	     :ensure t
+	     :config
+	     (which-key-mode))
 
 ;; Remove annoying minimize shortcut
 (global-set-key (kbd "C-z") nil)
