@@ -95,6 +95,12 @@
 	     (setq ido-virtual-buffers t)
 	     (ido-mode))
 
+;; time-tracking
+(use-package wakatime-mode
+	     :ensure t
+	     :config
+	     (global-wakatime-mode))
+
 ;;;;;;;;;;;;;;
 ;; ORG-MODE ;;
 ;;;;;;;;;;;;;;
