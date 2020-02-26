@@ -71,6 +71,10 @@
     (smartparens-global-mode 1)
     (show-paren-mode t)))
 
+;; sync parenthesis (){}[]...
+(use-package paredit
+	     :ensure t)
+
 (use-package expand-region
   :ensure t
   :bind ("M-m" . er/expand-region))
