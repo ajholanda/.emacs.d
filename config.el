@@ -75,9 +75,11 @@
     (smartparens-global-mode 1)
     (show-paren-mode t)))
 
+(setq indent-tabs-mode nil)
+
 ;; sync parenthesis (){}[]...
 (use-package paredit
-	     :ensure t)
+  :ensure t)
 
 ;; aggressive indentation
 (use-package aggressive-indent
@@ -167,15 +169,15 @@
 ;; PYTHON ;;
 ;;;;;;;;;;;;
 (add-hook 'python-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode t)
-            (setq tab-width 4)))
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; remove ^M characters
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'comint-output-filter-functions
-          'comint-strip-ctrl-m)
+	  'comint-strip-ctrl-m)
 
 ;;;;;;;;;;;;;
 ;; DESKTOP ;;
@@ -233,7 +235,4 @@
 (use-package ansible
 	     :ensure t
 	     :config
-	     (add-hook 'yaml-mode-hook '(lambda () (ansible 1)))
-	     (global-set-key (kbd "C-c b") 'ansible::decrypt-buffer)
-	     (global-set-key (kbd "C-c g") 'ansible::encrypt-buffer)
-	     (add-hook 'ansible-hook 'ansible::auto-decrypt-encrypt))
+	     (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
