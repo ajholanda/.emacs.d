@@ -1,6 +1,13 @@
+;; Return a string with complete path of the elisp file to load.
+;; Argument: ctx (context)
+(defun ajh-load (ctx) (load (concat "~/.emacs.d/" "ajh-" ctx ".el")))
+
 ;; Give space to Emacs Garbage Collection to avoid frequently interruptions.
 (setq gc-cons-threshold 50000000)
 (setq large-file-warning-threshold 100000000)
+
+;; Python
+(ajh-load "python")
 
 ;;;;;;;
 ;; C ;;
@@ -164,14 +171,6 @@
 ;; Record a note along with the timestamp when state changes from TODO
 ;; to DONE.
 (setq org-log-done 'note)
-
-;;;;;;;;;;;;
-;; PYTHON ;;
-;;;;;;;;;;;;
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; remove ^M characters
