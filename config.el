@@ -6,9 +6,6 @@
 (setq gc-cons-threshold 50000000)
 (setq large-file-warning-threshold 100000000)
 
-;; Python
-(ajh-load "python")
-
 ;;;;;;;
 ;; C ;;
 ;;;;;;;
@@ -23,13 +20,18 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
+(package-refresh-contents)
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package))
+
+;; MUST BE AFTER use-package initialization
+;; Custom defs for programming languages
+(ajh-load "python")
+(ajh-load "rust")
 
 ;;;;;;;;;;;;
 ;; VISUAL ;;
@@ -48,7 +50,7 @@
 
 ;; chinese fonts
 (use-package cnfonts
-	     :ensure t)
+             :ensure t)
 
 ;; greater font size
 (set-default-font "Monospace-16")
@@ -90,29 +92,29 @@
 
 ;; aggressive indentation
 (use-package aggressive-indent
-	     :ensure t
-	     :config
-	     (global-aggressive-indent-mode t)
-	     (add-to-list 'aggressive-indent-excluded-modes 'fundamental-mode)
-	     (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-	     (add-hook 'css-mode-hook #'aggressive-indent-mode)
-	     (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+             :ensure t
+             :config
+             (global-aggressive-indent-mode t)
+             (add-to-list 'aggressive-indent-excluded-modes 'fundamental-mode)
+             (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+             (add-hook 'css-mode-hook #'aggressive-indent-mode)
+             (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
 ;; ivy mode
 (use-package swiper
-	     :ensure t)
+             :ensure t)
 (use-package ivy
-	     :after swiper
-	     :defer 3
-	     :ensure t
-	     :config
-	     (setq ivy-use-virtual-buffers t)
-	     (setq enable-recursive-minibuffers t)
-	     ;; enable this if you want `swiper' to use it
-	     ;; (setq search-default-mode #'char-fold-to-regexp)
-	     (global-set-key "\C-s" 'swiper)
-	     (global-set-key (kbd "C-c C-r") 'ivy-resume)
-	     (global-set-key (kbd "<f6>") 'ivy-resume))
+             :after swiper
+             :defer 3
+             :ensure t
+             :config
+             (setq ivy-use-virtual-buffers t)
+             (setq enable-recursive-minibuffers t)
+             ;; enable this if you want `swiper' to use it
+             ;; (setq search-default-mode #'char-fold-to-regexp)
+             (global-set-key "\C-s" 'swiper)
+             (global-set-key (kbd "C-c C-r") 'ivy-resume)
+             (global-set-key (kbd "<f6>") 'ivy-resume))
 
 (use-package expand-region
   :ensure t
@@ -123,9 +125,9 @@
 
 ;; help to find the command keys
 (use-package which-key
-	     :ensure t
-	     :config
-	     (which-key-mode))
+             :ensure t
+             :config
+             (which-key-mode))
 
 ;; Remove annoying minimize shortcut
 (global-set-key (kbd "C-z") nil)
@@ -134,20 +136,20 @@
 ;; PROJECT ;;
 ;;;;;;;;;;;;;
 (use-package magit
-	     :ensure t
-	     :bind (("C-x g" . magit-status))
-	     :config
-	     (info-initialize)
-	     (add-to-list 'Info-directory-list
-			  "~/.emacs.d/site-lisp/magit/Documentation/"))
+             :ensure t
+             :bind (("C-x g" . magit-status))
+             :config
+             (info-initialize)
+             (add-to-list 'Info-directory-list
+                          "~/.emacs.d/site-lisp/magit/Documentation/"))
 
 (use-package ido
-	     :ensure t
-	     :config
-	     (setq ido-auto-merge-delay-time 99999999)
-	     (setq ido-everywhere t)
-	     (setq ido-virtual-buffers t)
-	     (ido-mode))
+             :ensure t
+             :config
+             (setq ido-auto-merge-delay-time 99999999)
+             (setq ido-everywhere t)
+             (setq ido-virtual-buffers t)
+             (ido-mode))
 
 ;;;;;;;;;;;;;;
 ;; ORG-MODE ;;
@@ -170,7 +172,7 @@
 ;; remove ^M characters
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'comint-output-filter-functions
-	  'comint-strip-ctrl-m)
+          'comint-strip-ctrl-m)
 
 ;;;;;;;;;;;;;
 ;; DESKTOP ;;
@@ -182,11 +184,11 @@
 
 ;; remove desktop after it's been read
 (add-hook 'desktop-after-read-hook
-	  '(lambda ()
-	     ;; desktop-remove clears desktop-dirname
-	     (setq desktop-dirname-tmp desktop-dirname)
-	     (desktop-remove)
-	     (setq desktop-dirname desktop-dirname-tmp)))
+          '(lambda ()
+             ;; desktop-remove clears desktop-dirname
+             (setq desktop-dirname-tmp desktop-dirname)
+             (desktop-remove)
+             (setq desktop-dirname desktop-dirname-tmp)))
 
 (defun saved-session ()
   (file-exists-p (concat desktop-dirname "/" desktop-base-file-name)))
@@ -205,27 +207,27 @@
   (interactive)
   (if (saved-session)
       (if (y-or-n-p "Overwrite existing desktop? ")
-	  (desktop-save-in-desktop-dir)
-	(message "Session not saved."))
+          (desktop-save-in-desktop-dir)
+        (message "Session not saved."))
   (desktop-save-in-desktop-dir)))
 
 ;; ask user whether to restore desktop at start-up
 (add-hook 'after-init-hook
-	  '(lambda ()
-	     (if (saved-session)
-		 (if (y-or-n-p "Restore desktop? ")
-		     (session-restore)))))
+          '(lambda ()
+             (if (saved-session)
+                 (if (y-or-n-p "Restore desktop? ")
+                     (session-restore)))))
 
 ;;;;;;;;;
 ;; WEB ;;
 ;;;;;;;;;
 (use-package php-mode
-	     :ensure t)
+  :ensure t)
 
 ;;;;;;;;;;;;;
 ;; ANSIBLE ;;
 ;;;;;;;;;;;;;
 (use-package ansible
-	     :ensure t
-	     :config
-	     (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
+  :ensure t
+  :config
+  (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
