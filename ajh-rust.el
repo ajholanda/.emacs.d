@@ -18,7 +18,7 @@
               (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)
               )
             )
-  (setq rust-format-on-save t)
+;;  (setq rust-format-on-save t)
   (define-key rust-mode-map (kbd "C-c C-c") 'rust-run)
   )
 
