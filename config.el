@@ -28,8 +28,10 @@
 (eval-when-compile
   (require 'use-package))
 
-;; MUST BE AFTER use-package initialization
-;; Custom defs for programming languages
+;; MUST BE PLACED AFTER use-package initialization
+;; Custom defs for programming languages and modes
+(ajh-load "org")
+(ajh-load "projectile")
 (ajh-load "python")
 (ajh-load "rust")
 
@@ -144,25 +146,12 @@
                           "~/.emacs.d/site-lisp/magit/Documentation/"))
 
 (use-package ido
-             :ensure t
-             :config
-             (setq ido-auto-merge-delay-time 99999999)
-             (setq ido-everywhere t)
-             (setq ido-virtual-buffers t)
-             (ido-mode))
-
-;;;;;;;;;;;;;;
-;; ORG-MODE ;;
-;;;;;;;;;;;;;;
-;; TIME clocking
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
-
-;; TODO states and keywords for fast access
-(setq org-todo-keywords
-'((sequence "TODO(t)" "|" "DONE(d)")
-(sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-(sequence "|" "CANCELED(c)")))
+  :ensure t
+  :config
+  (setq ido-auto-merge-delay-time 99999999)
+  (setq ido-everywhere t)
+  (setq ido-virtual-buffers t)
+  (ido-mode))
 
 ;; Record a note along with the timestamp when state changes from TODO
 ;; to DONE.
