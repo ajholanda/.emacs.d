@@ -6,12 +6,6 @@
 (setq gc-cons-threshold 50000000)
 (setq large-file-warning-threshold 100000000)
 
-;;;;;;;
-;; C ;;
-;;;;;;;
-(setq c-default-style "linux"
-      c-basic-offset 8)
-
 ;;;;;;;;;;;;;
 ;; PACKAGE ;;
 ;;;;;;;;;;;;;
@@ -30,10 +24,13 @@
 
 ;; MUST BE PLACED AFTER use-package initialization
 ;; Custom defs for programming languages and modes
+(ajh-load "ansible")
+(ajh-load "google")
 (ajh-load "org")
 (ajh-load "projectile")
 (ajh-load "python")
 (ajh-load "rust")
+(ajh-load "web")
 
 ;;;;;;;;;;;;
 ;; VISUAL ;;
@@ -70,6 +67,16 @@
 ;; less minor-mode(s) appearing
 (use-package diminish
   :ensure t)
+
+;; define function to display ansi colours for a buffer
+;; http://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode
+(use-package ansi-color
+  :ensure t
+  :init
+  (defun display-ansi-colors ()
+    (interactive)
+    (ansi-color-apply-on-region (point-min) (point-max)))
+  )
 
 (toggle-frame-fullscreen)
 
@@ -206,17 +213,3 @@
              (if (saved-session)
                  (if (y-or-n-p "Restore desktop? ")
                      (session-restore)))))
-
-;;;;;;;;;
-;; WEB ;;
-;;;;;;;;;
-(use-package php-mode
-  :ensure t)
-
-;;;;;;;;;;;;;
-;; ANSIBLE ;;
-;;;;;;;;;;;;;
-(use-package ansible
-  :ensure t
-  :config
-  (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
