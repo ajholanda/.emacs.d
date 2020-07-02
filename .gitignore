@@ -1,5 +1,6 @@
 /auto-save-list/
 *~
+gcal
 /org-clock-save.el
 *.eld
 /elpa/
