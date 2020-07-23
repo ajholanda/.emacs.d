@@ -8,6 +8,24 @@
 (setq org-agenda-files
       (file-expand-wildcards "~/orgmode/*.org"))
 
+;; Agenda files
+(setq org-agenda-files '("~/orgmode/inbox.org"
+                         "~/orgmode/current.org"
+                         "~/orgmode/tickler.org"))
+
+;; Refile target
+(setq org-refile-targets '(("~/orgmode/current.org" :maxlevel . 3)
+		           ("~/orgmode/next.org" :level . 1)
+		           ("~/gtd/tickler.org" :maxlevel . 2)))
+
+;; Org capture
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+	(file+headline "~/orgmode/inbox.org" "Tasks")
+	"* TODO %i%?")
+	("T" "Tickler" entry
+	(file+headline "~/orgmode/tickler.org" "Tickler")
+	"* %i%? \n %U")))
+
 ;; TODO keywords
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "ABORTED(a)")))
